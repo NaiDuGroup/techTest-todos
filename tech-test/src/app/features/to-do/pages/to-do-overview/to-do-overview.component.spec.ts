@@ -25,7 +25,7 @@ describe('ToDoOverviewComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it(`should have as title 'tech-test'`, () => {
+  it(`should have as title 'OriginMarkets TODOS'`, () => {
     fixture = TestBed.createComponent(ToDoOverviewComponent);
     const app = fixture.debugElement.componentInstance;
 
