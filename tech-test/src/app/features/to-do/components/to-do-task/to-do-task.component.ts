@@ -28,7 +28,7 @@ export class ToDoTaskComponent implements OnInit {
     this.toDoForm.valueChanges.pipe(
       map(value => {
         if (value.done) {
-          value.done = `${new Date().getDay()}-${(new Date().getMonth()) + 1}-${new Date().getFullYear()}`;
+          value.done = new Date().toLocaleDateString();
         }
         return value;
       }),

@@ -16,7 +16,7 @@ export class ToDoApiService {
     return this.http.get<ToDoItem[]>(`${this.endpoint}`);
   }
 
-  public addToDoItem(toDoItem: ToDoItem): Observable<ToDoItem> {
+  public addToDoItem(toDoItem: Omit<ToDoItem, 'id'>): Observable<ToDoItem> {
     return this.http.post<ToDoItem>(`${this.endpoint}`, toDoItem);
   }
 

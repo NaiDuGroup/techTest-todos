@@ -11,12 +11,23 @@ import { map } from 'rxjs/operators';
 export class ToDoOverviewComponent implements OnInit {
   public title = 'OriginMarkets TODOS';
   public toDoItems: ToDoItem[];
-  public filteredToDoItems: ToDoItem[];
-  public useFilteredValues = false;
+  public filter: string;
 
   constructor(
     public toDoApiService: ToDoApiService,
   ) {
+  }
+
+  public get toDosToDisplay(): ToDoItem[] {
+    if (!this.filter?.trim()) {
+      return this.toDoItems;
+    }
+
+    return this.toDoItems.filter(
+      (toDoItem) => {
+        return toDoItem.label.toLowerCase().includes(this.filter.toLowerCase());
+      },
+    );
   }
 
   public ngOnInit(): void {
@@ -24,8 +35,6 @@ export class ToDoOverviewComponent implements OnInit {
   }
 
   public getToDoItems(): void {
-    this.useFilteredValues = false;
-
     this.toDoApiService.getToDoItems().pipe(
       map((toDoItems) => {
         return toDoItems.reverse();
@@ -35,14 +44,7 @@ export class ToDoOverviewComponent implements OnInit {
     });
   }
 
-  public getFilteredToDoItems(filter: string): ToDoItem[] {
-    if (filter !== ' ') {
-      this.useFilteredValues = true;
-      this.filteredToDoItems = this.toDoItems.filter((toDoItem) => {
-        return toDoItem.label.toLowerCase().includes(filter.toLowerCase());
-      });
-    } else {
-      return this.toDoItems;
-    }
+  public setGlobalFilter(filter): void {
+    this.filter = filter;
   }
 }

@@ -1,24 +1,14 @@
 <div class="d-flex flex-column justify-content-center align-items-center">
   <h1 class="title">{{ title }}</h1>
+
   <app-main-input (addedNewToDoItem)="getToDoItems()"
-                  (filterItem)="getFilteredToDoItems($event)">
+                  (filterItem)="setGlobalFilter($event)">
   </app-main-input>
 
-  <ng-container *ngIf="!useFilteredValues; else filteredItems">
-    <div *ngFor="let toDoItem of toDoItems">
-      <app-to-do-task [toDoItem]="toDoItem"
-                      (deletedToDoItem)="getToDoItems()">
-      </app-to-do-task>
-    </div>
-  </ng-container>
-
-  <ng-template #filteredItems>
-    <div *ngFor="let toDoItem of filteredToDoItems">
-      <app-to-do-task [toDoItem]="toDoItem"
-                      (deletedToDoItem)="getToDoItems()">
-      </app-to-do-task>
-    </div>
-  </ng-template>
+  <app-to-do-task *ngFor="let toDoItem of toDosToDisplay"
+                  [toDoItem]="toDoItem"
+                  (deletedToDoItem)="getToDoItems()">
+  </app-to-do-task>
 
   <app-footer [amount]="toDoItems?.length"></app-footer>
 </div>
