@@ -1,0 +1,39 @@
+<div class="to-do-item d-flex flex-column pl-2"
+     [formGroup]="toDoForm">
+  <div class="d-flex flex-row align-items-center justify-content-between">
+    <div class="d-flex">
+      <input type="checkbox"
+             formControlName="done">
+
+      <input type="text"
+             formControlName="label"
+             class="label"
+             spellcheck="false"
+             [ngClass]="toDoForm.value.done ? 'closed-task' : ''">
+    </div>
+
+    <i class="bi bi-trash"
+       (click)="deleteToDoItem(toDoItem.id)">
+    </i>
+  </div>
+
+  <textarea formControlName="description"
+            class="description"
+            spellcheck="false"
+            placeholder="Description..."
+            [ngClass]="toDoForm.value.done ? 'closed-task' : ''">
+  </textarea>
+
+  <div class="d-flex flex-row align-items-center justify-content-between">
+    <input type="text"
+           formControlName="category"
+           spellcheck="false"
+           class="category"
+           [placeholder]="!toDoForm.value.done ? '| category |' : ''"
+           [ngClass]="toDoForm.value.done ? 'closed-task' : ''">
+
+    <div *ngIf="toDoForm.value.done">
+      Closed: {{ toDoForm.value.done }}
+    </div>
+  </div>
+</div>

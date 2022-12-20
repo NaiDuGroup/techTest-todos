@@ -1,0 +1,8 @@
+@import './styles/main.scss';
+
+html,
+body {
+  height: 100%;
+  overflow: auto;
+  background-color: $primary-color;
+}

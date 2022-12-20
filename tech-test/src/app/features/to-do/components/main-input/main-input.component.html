@@ -1,0 +1,12 @@
+<div class="d-flex flex-row justify-content-center align-items-center">
+  <input class="main-input"
+         autofocus
+         [formControl]="label"
+         [placeholder]="'What needs to be done?'"
+         (keydown.enter)="addToDoItem()">
+
+  <button type="button"
+          class="btn btn-secondary"
+          (click)="addToDoItem()"> +
+  </button>
+</div>
